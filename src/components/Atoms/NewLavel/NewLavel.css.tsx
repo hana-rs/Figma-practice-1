@@ -11,6 +11,9 @@ export const NewLabel = style({
     fontWeight: 'bold',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
+
+
 });
 
 export default {
