@@ -1,20 +1,24 @@
-import type { StorybookConfig } from '@storybook/react-vite';
+// .storybook/main.ts
+import { StorybookConfig } from '@storybook/react-vite';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 const config: StorybookConfig = {
-  "stories": [
+  stories: [
     "../src/**/*.mdx",
-    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+    "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
-  "addons": [
-    "@chromatic-com/storybook",
-    "@storybook/addon-docs",
-    "@storybook/addon-onboarding",
-    "@storybook/addon-a11y",
-    "@storybook/addon-vitest"
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
   ],
-  "framework": {
-    "name": "@storybook/react-vite",
-    "options": {}
-  }
+  framework: {
+    name: "@storybook/react-vite",
+    options: {},
+  },
+  viteFinal: async (config) => {
+    config.plugins = [...(config.plugins || []), vanillaExtractPlugin()];
+    return config;
+  },
 };
+
 export default config;
